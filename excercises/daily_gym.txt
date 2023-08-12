@@ -1,0 +1,24 @@
+# Attempt each activity daily for 15 days, where ${c} is your cluster url like localhost:9200 or some other form of es host url
+
+  1. What version of ES is being run?
+  curl --silent -X GET http://${c}/ 
+
+  name: "10.xx.xx.xx_9204"
+  cluster_name: "a_b_c"
+  version : { number: "7.6.2" }
+  
+  
+  2. How to check cluster health
+  curl --silent -X GET http://${c}/_cluster/health?pretty
+
+  2. How to check how many indices in the cluster
+  curl --silent -X GET http://${c}/_cat/indices?v
+
+  health, status, index, uuid, pri, rep, docs.count, docs.deleted, store.size, pri.store.size
+  green, open, abc_index, asdad,998, 1, 89998998998, 0           , 20.6tb    , 20.6tb
+  yellow, open, cde_index, bcdad,998, 1,  9s8998998, 0           , 20.6tb    , 20.6tb
+  red, open, cde_index, bcdad,998, 1,  9s8998998, 0           , 20.6tb    , 20.6tb
+
+  3. How to check which indices are readonly right now?
+  curl --silent -X GET http://${c}/_cat/indices?pretty
+    
