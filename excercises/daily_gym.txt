@@ -26,19 +26,21 @@
   x.x.x.x,  74,            22          0          , 7.8    ,  4.6  ,  2.7    ,  dim      ,        , data_1_0_9200
   y.y.y.y,  84,            12          10         , 8      ,  4    ,  2      ,  m        ,  *      , data_1_0_9200
 
-  5. How to check which are master nodes?
+
+
+  5. How to check jdk version, es version, port no, disk_used, disk_available,disk_used_percent, current_heap
+  Same as above with specific headers
+
+  curl --silent -X GET http://${c}/_cat/nodes?h=ip,name,node.role,master,jdk,version,port,pid,disk.used_percent,disk.total,disk.used,disk.avail,heap.current,ram.current,ram.max,uptime
+
+  curl --silent -X GET http://${c}/_cat/nodes?v=true&
+
+  6. How to check which are master nodes?
   For current master
   curl --silent -X GET http://${c}/_cat/master
 
   Detailed output of master, data or other configs
   curl --silent -X GET http://${c}/_nodes/master:true,data:true,ingest:false?pretty
-
-  
-
-  5. How to check jdk version, es version, port no, disk_used, disk_available,disk_used_percent, current_heap
-  Same as above with specific headers
-
-  curl --silent -X GET http://${c}/_cat/nodes?v=true&
   
 
   5. How to check which indices are readonly right now?
