@@ -3,7 +3,7 @@
   1. What version of ES is being run?
   curl --silent -X GET http://${c}/ 
 
-  name: "10.xx.xx.xx_9204"
+  name: "10.xx.xx.xx_9204 (node_name)"
   cluster_name: "a_b_c"
   version : { number: "7.6.2" }
   
@@ -11,7 +11,7 @@
   2. How to check cluster health
   curl --silent -X GET http://${c}/_cluster/health?pretty
 
-  2. How to check how many indices in the cluster
+  3. How to check how many indices in the cluster
   curl --silent -X GET http://${c}/_cat/indices?v
 
   health, status, index, uuid, pri, rep, docs.count, docs.deleted, store.size, pri.store.size
@@ -19,6 +19,28 @@
   yellow, open, cde_index, bcdad,998, 1,  9s8998998, 0           , 20.6tb    , 20.6tb
   red, open, cde_index, bcdad,998, 1,  9s8998998, 0           , 20.6tb    , 20.6tb
 
-  3. How to check which indices are readonly right now?
+  4. How to check nodes of a cluster
+  curl --silent -X GET http://${c}/_cat/nodes?v
+
+  ip,       heap.percent, ram.percent, cpu (%used), load_1m, load_5m, load_15m, node.role, master, name
+  x.x.x.x,  74,            22          0          , 7.8    ,  4.6  ,  2.7    ,  dim      ,        , data_1_0_9200
+  y.y.y.y,  84,            12          10         , 8      ,  4    ,  2      ,  m        ,  *      , data_1_0_9200
+
+  5. How to check which are master nodes?
+  For current master
+  curl --silent -X GET http://${c}/_cat/master
+
+  Detailed output of master, data or other configs
+  curl --silent -X GET http://${c}/_nodes/master:true,data:true,ingest:false?pretty
+
+  
+
+  5. How to check jdk version, es version, port no, disk_used, disk_available,disk_used_percent, current_heap
+  Same as above with specific headers
+
+  curl --silent -X GET http://${c}/_cat/nodes?v=true&
+  
+
+  5. How to check which indices are readonly right now?
   curl --silent -X GET http://${c}/_cat/indices?pretty
     
