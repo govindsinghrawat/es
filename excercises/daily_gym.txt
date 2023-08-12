@@ -33,7 +33,6 @@
 
   curl --silent -X GET http://${c}/_cat/nodes?h=ip,name,node.role,master,jdk,version,port,pid,disk.used_percent,disk.total,disk.used,disk.avail,heap.current,ram.current,ram.max,uptime
 
-  curl --silent -X GET http://${c}/_cat/nodes?v=true&
 
   6. How to check which are master nodes?
   For current master
@@ -41,6 +40,9 @@
 
   Detailed output of master, data or other configs
   curl --silent -X GET http://${c}/_nodes/master:true,data:true,ingest:false?pretty
+
+  For specifically master nodes
+  curl --silent -X GET http://${c}/_nodes/stats?pretty | grep -B3 \"master\"
   
 
   5. How to check which indices are readonly right now?
