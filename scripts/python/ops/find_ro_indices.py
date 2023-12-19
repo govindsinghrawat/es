@@ -13,6 +13,7 @@ def interpret_ro_data(data):
     
 
 
+
 if sys.argv[1]:
   url=f"http://{sys.argv[1]}/*/_settings"
 else:
