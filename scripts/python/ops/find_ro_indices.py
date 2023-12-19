@@ -1,5 +1,17 @@
-import requests
+import helpers
 import sys
+
+
+def interpret_ro_data(data):
+  print("Interpreting data:")
+  for k,v in data.items():
+    try:
+      if v["settings"]["index"]["blocks"]["read_only_allow_delete"]:
+        print(k)
+      except:
+        continue
+    
+
 
 if sys.argv[1]:
   url=f"http://{sys.argv[1]}/*/_settings"
@@ -12,12 +24,4 @@ headers={}
 
 resp=requests.request("GET", url, headers=headers, data=payload)
 
-if resp.status_code == 200:
-  for k,v in resp.json().items():
-    try:
-      if v["settings"]["index"]["blocks"]["read_only_allow_delete"]:
-        print(k)
-      except:
-        continue
-        
-    
+process_response(resp, interpret_function=interpret_ro_data)
