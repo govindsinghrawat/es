@@ -30,6 +30,34 @@ def make_api_request(url, headers=None, payload=None, method='GET'):
             "status": None
         }
 
+
+def process_response(response_dict, interpret_function):
+    status_code = response_dict.get("status", None)
+    error_message = response_dict.get("error", None)
+
+    if status_code == 200:
+        # Call the interpret function on the data element
+        data_value = response_dict.get("data", None)
+        interpret_function(data_value)
+    else:
+        # Print error information
+        print(f"Error: {error_message}, Status Code: {status_code}")
+
+# Example interpret function
+# def interpret_data(data):
+#     print("Interpreting data:")
+#     print(data)
+
+# Example response dictionary
+# response_dict = {
+#     "data": {"key": "value"},
+#     "error": None,
+#     "status": 200
+# }
+
+# Process the response using the process_response function
+# process_response(response_dict, interpret_function=interpret_data)
+
 # Example usage:
 if __name__ == "__main__":
   url = "https://jsonplaceholder.typicode.com/todos/1"
